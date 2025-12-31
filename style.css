@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+ 
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  color: #555;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+button {
+  padding: 8px 12px;
+  margin: 2px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-btn {
+  width: 100%;
+}
+
+.present {
+  background: #4CAF50;
+  color: white;
+}
+
+.absent {
+  background: #f44336;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background: #eee;
+}
+
+tfoot th {
+  background: #222;
+  color: white;
+  font-weight: bold;
+}
+
+button {
+  font-size: 12px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#toggleAddSubBtn {
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#toggleAddSubBtn:hover {
+  opacity: 0.7;
+}
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendance Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ 
+  <h1>📘 Attendance Tracker <p>by virendraxd</p></h1>
+
+    <!-- Add Subject -->
+    <div class="card">
+    <div class="card-header">
+        <h2>Add Subject</h2>
+        <button id="toggleAddSubBtn" onclick="toggleAddSubject()">➖</button>
+    </div>
+
+    <div id="addSubjectBody">
+        <input type="text" id="subjectName" placeholder="Subject Name" />
+        <input type="text" id="subjectCode" placeholder="Subject Code" />
+        <input type="text" id="teacherName" placeholder="Teacher Name" />
+
+        <button onclick="addSubject()" class="present">Add Subject</button>
+    </div>
+    </div>
+
+  <!-- Attendance Table -->
+  <div class="card table-card">
+    <h2>Your Subjects</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <!-- <th>Code</th> -->
+                <th>Teacher</th>
+                <th>Total</th>
+                <th>Attended</th>
+                <th>%</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="subjectTable"></tbody>
+
+        <tfoot>
+            <tr>
+                <th colspan="2">Total</th>
+                <th id="totalClassesCell">0</th>
+                <th id="totalAttendedCell">0</th>
+                <th id="overallPercentCell">0%</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+  </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
