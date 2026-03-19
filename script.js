@@ -25,20 +25,102 @@ function toggleAddSubject() {
 }
 
 /* ===============================
-   DATA STORAGE (LOCAL)
+   FIREBASE CONFIGURATION
 ================================ */
-let subjects = JSON.parse(localStorage.getItem("subjects")) || [];
+// TODO: Replace this with your actual Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBL-X0y5ve2Uqa7ESamuXLmAPVMSwhpf8M",
+  authDomain: "attendance-tracker-c5721.firebaseapp.com",
+  databaseURL: "https://attendance-tracker-c5721-default-rtdb.firebaseio.com",
+  projectId: "attendance-tracker-c5721",
+  storageBucket: "attendance-tracker-c5721.firebasestorage.app",
+  messagingSenderId: "373910652258",
+  appId: "1:373910652258:web:6da21ce1c9c68a5908183b"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const auth = firebase.auth();
+const database = firebase.database();
+let subjectsRef = null;
+let currentUser = null;
+
+/* ===============================
+   AUTHENTICATION
+================================ */
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch((error) => {
+    console.error("Login failed:", error);
+    alert("Could not log in. Check console for details.");
+  });
+}
+
+function logout() {
+  auth.signOut().catch((error) => {
+    console.error("Logout failed:", error);
+  });
+}
+
+auth.onAuthStateChanged((user) => {
+  const loginSection = document.getElementById("loginSection");
+  const appSection = document.getElementById("appSection");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (user) {
+    // User is logged in
+    currentUser = user;
+    loginSection.style.display = "none";
+    appSection.style.display = "block";
+    logoutBtn.style.display = "block";
+    
+    // Create a new reference dedicated to this matched user
+    subjectsRef = database.ref(`attendance_tracker_users/${user.uid}/subjects`);
+    loadSubjects();
+  } else {
+    // User is logged out
+    currentUser = null;
+    loginSection.style.display = "block";
+    appSection.style.display = "none";
+    logoutBtn.style.display = "none";
+    
+    // Clean up past listeners so errors don't trigger when logged out
+    if (subjectsRef) {
+      subjectsRef.off("value");
+    }
+    subjectsRef = null;
+    subjects = [];
+    renderTable();
+  }
+});
+/* ===============================
+   DATA STORAGE (FIREBASE)
+================================ */
+let subjects = [];
 
 /* ===============================
    SAVE & LOAD
 ================================ */
 function saveSubjects() {
-  localStorage.setItem("subjects", JSON.stringify(subjects));
+  if (!subjectsRef) return;
+  subjectsRef.set(subjects).catch((error) => {
+    console.error("Error saving data to Firebase:", error);
+    alert("Could not save to Firebase. Check console for details.");
+  });
 }
 
 function loadSubjects() {
-  subjects = JSON.parse(localStorage.getItem("subjects")) || [];
-  renderTable();
+  if (!subjectsRef) return;
+  subjectsRef.on("value", (snapshot) => {
+    const data = snapshot.val();
+    subjects = data || [];
+    renderTable();
+  }, (error) => {
+    console.error("Error loading data from Firebase:", error);
+    alert("Could not load from Firebase. Check console for details.");
+  });
 }
 
 /* ===============================
@@ -172,9 +254,6 @@ function clearInputs() {
 /* ===============================
    INITIAL LOAD
 ================================ */
-// loadSubjects();
-
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Page loaded → loading data");
-  loadSubjects();
+  console.log("Page loaded → waiting for authentication state...");
 });

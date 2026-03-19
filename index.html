@@ -7,8 +7,20 @@
 </head>
 <body>
  
-  <h1>📘 Attendance Tracker <p>by virendraxd</p></h1>
+  <div class="header-container" style="display: flex; justify-content: center; align-items: center; position: relative;">
+    <h1 style="width: 100%;">📘 Attendance Tracker <p>by virendraxd</p></h1>
+    <button id="logoutBtn" onclick="logout()" style="display: none; position: absolute; right: 20px; background: #f44336; color: white;">Logout</button>
+  </div>
 
+  <!-- Login Section -->
+  <div id="loginSection" class="card" style="text-align: center; padding: 40px;">
+    <h2>Welcome to Attendance Tracker</h2>
+    <p>Please log in to manage your attendance safely.</p>
+    <button onclick="loginWithGoogle()" style="background: #4285F4; color: white; padding: 10px 20px; font-size: 16px; margin-top: 15px;">Login with Google</button>
+  </div>
+
+  <!-- Main App Section (Hidden by default) -->
+  <div id="appSection" style="display: none;">
     <!-- Add Subject -->
     <div class="card">
     <div class="card-header">
@@ -55,6 +67,12 @@
         </tfoot>
     </table>
   </div>
+  </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
 
     <script src="script.js"></script>
 </body>
