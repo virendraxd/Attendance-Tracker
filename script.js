@@ -31,7 +31,7 @@ function toggleAddSubject() {
 const firebaseConfig = {
   apiKey: "AIzaSyBL-X0y5ve2Uqa7ESamuXLmAPVMSwhpf8M",
   authDomain: "attendance-tracker-c5721.firebaseapp.com",
-  databaseURL: "https://attendance-tracker-c5721-default-rtdb.firebaseio.com",
+  databaseURL: "https://attendance-tracker-c5721-default-rtdb.asia-southeast1.firebasedatabase.app/",
   projectId: "attendance-tracker-c5721",
   storageBucket: "attendance-tracker-c5721.firebasestorage.app",
   messagingSenderId: "373910652258",
